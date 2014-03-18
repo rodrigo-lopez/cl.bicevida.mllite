@@ -1,0 +1,68 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <mime-mapping>    
+        <extension>js</extension>        
+        <mime-type>application/javascript</mime-type>        
+    </mime-mapping>
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>jpeg</extension>
+        <mime-type>image/jpeg</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>jpg</extension>
+        <mime-type>image/jpeg</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>png</extension>
+        <mime-type>image/png</mime-type>
+    </mime-mapping>
+    <!--This mapping makes the favicon works on Tomcat-->
+    <mime-mapping>
+        <extension>ico</extension>
+        <mime-type>image/x-icon</mime-type>
+        <!--<mime-type>image/vnd.microsoft.icon</mime-type>-->
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>eot</extension>
+        <mime-type>application/vnd.ms-fontobject</mime-type>
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>svg</extension>
+        <mime-type>image/svg+xml</mime-type>
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>ttf</extension>
+        <mime-type>application/x-font-ttf</mime-type>
+        <!--<mime-type>font/ttf</mime-type>-->
+        <!--<mime-type>font/truetype</mime-type>-->
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>application/x-font-woff</mime-type>
+        <!--<mime-type>font/x-woff</mime-type>-->
+    </mime-mapping>
+    <!-- Aqui se agregan los links -->
+    <!-- La idea es que despues de un refresh del browser todas las urls desplieguen index.jsp (One Page App) -->
+    <!--
+    <servlet>
+        <servlet-name>OnePageServlet</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OnePageServlet</servlet-name>
+        <url-pattern>/cliente/*</url-pattern>
+        <url-pattern>/res/*</url-pattern>
+        <url-pattern>/productos/*</url-pattern>
+    </servlet-mapping>
+    -->
+</web-app>

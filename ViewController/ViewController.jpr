@@ -103,6 +103,10 @@
                      <hash n="filters">
                         <list n="rules">
                            <hash>
+                              <value n="pattern" v="yeoman/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
                               <value n="pattern" v="cl.bicevida.mllite/"/>
                               <value n="type" v="1"/>
                            </hash>

@@ -121,7 +121,7 @@ module.exports = function (grunt) {
             '.tmp',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*',
-            '!<%= yeoman.dist %>/cl.bicevida.mllite',
+            '!<%= yeoman.dist %>/yeoman',
           ]
         }]
       },

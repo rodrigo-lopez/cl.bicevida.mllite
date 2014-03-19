@@ -4,7 +4,9 @@ angular.module('mlliteApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  //'ngAnimate',
+  'ui.bootstrap'
 ]).config(function ($httpProvider) {
   $httpProvider.defaults.transformRequest = function (data) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';

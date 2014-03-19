@@ -16,20 +16,27 @@
 </div>
 -->
 <!--Hola-->
-<div class="container">
+<!--<div class="container">-->
+
 <div class="panel panel-default">
-  <div class="panel-body">
-    <form name="form" ng-submit="submit()" class="form-signin" role="form">
-        <h2 class="form-signin-heading">Liquidador</h2>
-        <input type="text" name="rut" class="form-control" placeholder="Ingrese RUT del titular" ng-placeholder="Ingrese RUT del titular" ng-model="busqueda.rut" required autofocus>
-        <label><span class="help-block">Ejemplo: 12345678-1</span></label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-show="form.rut.$error.bvValidarRut || busqueda.rut.length == 0" >Sign in</button>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-show="!form.rut.$error.bvValidarRut && busqueda.rut.length > 0" ng-click="go('/coberturas/' + busqueda.rut)">Sign in</button>
-    </form>
-    </div>
+    <div class="panel-body">
+        <form name="form" ng-submit="submit()" class="form-signin" role="form">
+            <h2 class="form-signin-heading">Liquidador</h2>
+            <input type="text" name="rut" class="form-control" placeholder="Ingrese RUT del titular"
+                   ng-placeholder="Ingrese RUT del titular" ng-model="busqueda.rut" required="required"
+                   autofocus="autofocus"></input>
+            <label>
+                <span class="help-block">Ejemplo: 12345678-1</span>
+            </label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"
+                    ng-show="form.rut.$error.bvValidarRut || busqueda.rut.length == 0">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"
+                    ng-show="!form.rut.$error.bvValidarRut &amp;&amp; busqueda.rut.length > 0"
+                    ng-click="go('/coberturas/' + busqueda.rut)">Sign in</button>
+        </form>
     </div>
 </div>
-
+<!--</div>-->
 <!--
 <div class="container">
 <div class="row-fluid marketing">

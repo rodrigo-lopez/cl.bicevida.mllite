@@ -25,7 +25,33 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    
+    
+     <accordion-group is-open="isPolizaOpen">
+            <accordion-heading>
+                P&oacute;liza
+            </accordion-heading>
+            <div class="form-group">
+                <label>Contratante</label>
+                <span>wrwrwerwe</span>
+            </div>
+            <div class="form-group">
+                <label>Empleador</label>
+                <span>sdfsdfsdfsfd</span>
+            </div>        
+            <div class="btn-group pull-right">
+                <a href="pdf/document.pdf" target="new" class="btn btn-default btn-sm">Ver Plan</a>
+            </div>                        
+        </accordion-group>
+        
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-md-12">   
+                <div class="container-fluid" ng-view=""></div>
+            </div>
+        </div>
+            
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -53,12 +79,14 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/prestaciones.js"></script>
         <!-- endbuild -->
 </body>
 </html>

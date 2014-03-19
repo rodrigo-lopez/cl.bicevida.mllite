@@ -1,0 +1,126 @@
+<!--<div class="row-fluid">-->
+<div >
+    <!--
+  <label class="checkbox">
+    <input type="checkbox" ng-model="oneAtATime">
+    Open only one at a time
+  </label>
+    -->
+
+    <accordion close-others="oneAtATime">      
+        <accordion-group is-open="isPolizaOpen">
+            <accordion-heading>
+                Póliza: {{polizaList[0].numero}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isPolizaOpen, 'glyphicon-chevron-right': !isPolizaOpen}"></i>                
+            </accordion-heading>
+            <div class="form-group">
+                <label>Contratante</label>
+                <span>{{polizaList[0].nombreContratante}}</span>
+            </div>
+            <div class="form-group">
+                <label>Empleador</label>
+                <span>{{polizaList[0].nombreEmpleador}}</span>
+            </div>        
+            <div class="btn-group pull-right">
+                <a href="pdf/document.pdf" target="new" class="btn btn-default btn-sm">Ver Plan</a>
+            </div>                        
+        </accordion-group>
+
+
+        <accordion-group is-open="isGrupoOpen" >
+            <accordion-heading>
+                Grupo Familiar <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isGrupoOpen, 'glyphicon-chevron-right': !isGrupoOpen}"></i>
+            </accordion-heading>
+            <div class="alert alert-success">
+            <span>Seleccione la persona que recibi&oacute; la atenci&oacute;n m&eacute;dica</span>    
+            </div>
+            <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>RUT</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Relación</th>
+                        <!--<th>Saldo ($)</th>-->
+                    </tr>
+                </thead>
+                <tbody ng-repeat="persona in grupoFamiliarList" style="cursor: pointer" ng-click="onRowClick(persona)">
+                    <tr ng-class="{well : persona == personaSeleccionada}">
+                        <td>{{persona.rut}}</td>
+                        <td>{{persona.nombre}}</td>
+                        <td>{{persona.apellidos}}</td>
+                        <td>{{persona.tipo}}</td>
+                        <!--<td>{{persona.saldo}}</td>-->
+                    </tr>
+                </tbody>
+
+            </table>          
+            </div>
+
+            <form name="formCoberturas" class="css-form" ng-show="personaSeleccionada != null">
+                <div class="panel-footer clearfix">
+                    Coberturas del {{personaSeleccionada.tipo}}: {{personaSeleccionada.nombre}} {{personaSeleccionada.apellidos}}
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-default btn-sm" ng-click="limpiar()">Limpiar</button>                
+                        <button class="btn btn-default btn-sm" ng-click="calcular()">Calcular</button>
+                        <button class="btn btn-primary btn-sm" ng-show="calculado" ng-click="liquidar()">Generar Liquidación</button>                
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- Grupo Familiar en formato Tabla, visible para dispositivos grandes:-->
+                <div class="row-fluid visible-sm visible-md visible-lg visible-print">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <!--<th class="hidden-xs">C&oacute;digo</th>-->
+                                <th>Nombre</th>
+                                <th>Total</th>
+                                <th>Aporte Isapre</th>
+                                <th>Copago</th>
+                                <th class="hidden-xs">Monto Reembolso</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="cobertura in coberturaList">
+                            <tr>
+                                <!--<td class="hidden-xs">{{cobertura.codigo}}</td>-->
+                                <td>{{cobertura.nombre}}</td>
+                                <td><input name="total" type="number" class="form-control" ng-model="cobertura.total"/></td>
+                                <td><input name="aporteIsapre" type="number" class="form-control" ng-model="cobertura.aporteIsapre"/></td>                                
+                                <td><input name="copago" type="number" class="form-control" ng-model="cobertura.copago"/></td>
+                                <td class="hidden-xs"><input name="aporteBiceVida" type="number" class="form-control" ng-model="cobertura.aporteBiceVida" readonly/></td>
+                            </tr>
+                        </tbody>
+                    </table>            
+                </div>
+
+                <!-- Grupo Familiar en formato Lista, visible para dispositivos pequeños-->
+                <div class="row-fluid visible-xs">
+                    <div ng-repeat="cobertura in coberturaList">
+                        <div class="row-fluid"><span><strong>{{cobertura.nombre}} <!--(C&oacute;d. {{cobertura.codigo}})--></strong></span></div>
+                        <div  class="row-fluid">
+                            <input placeholder="Ingrese Monto Prestación {{cobertura.nombre}}" name="total" type="number" class="form-control" ng-model="cobertura.total"/>                        
+                        </div>
+                        <div class="row-fluid">
+                            <input placeholder="Ingrese Aporte Isapre" name="aporteIsapre" type="number" class="form-control" ng-model="cobertura.aporteIsapre"/>
+                            <input placeholder="Ingrese Copago" name="copago" type="number" class="form-control" ng-model="cobertura.copago"/>
+                            <input placeholder="Aporte BICE Vida (a calcular)" name="aporteBiceVida" type="number" class="form-control" ng-model="cobertura.aporteBiceVida" readonly/>
+                        </div>
+                        <p/>
+                    </div>
+                </div>
+
+                <div ng-show="totalReembolsoBiceVida != null" class="panel-footer">Total reembolso BICE Vida {{totalReembolsoBiceVida}}</div>
+
+            </form>            
+
+
+        </accordion-group>
+
+    </accordion>
+</div>
+
+

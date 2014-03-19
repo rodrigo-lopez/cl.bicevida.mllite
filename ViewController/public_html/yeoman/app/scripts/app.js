@@ -19,6 +19,10 @@ angular.module('mlliteApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/prestaciones', {
+        templateUrl: 'views/prestaciones.html',
+        controller: 'PrestacionesCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

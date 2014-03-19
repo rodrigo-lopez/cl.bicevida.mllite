@@ -1,24 +1,40 @@
+<!--
 <div class="container">
     <form name="form" ng-submit="submit()" class="css-form">
         <div class="input-group">
             <input type="text" name="rut" class="form-control" placeholder="Ingrese RUT del titular" ng-placeholder="Ingrese RUT del titular" ng-model="busqueda.rut">
-            <!--
+           
             <span class="input-group-btn">
                 <button class="btn btn-default" ng-show="form.rut.$error.bvValidarRut || busqueda.rut.length == 0" disabled>Go!</button>
                 <button class="btn btn-default" ng-show="!form.rut.$error.bvValidarRut && busqueda.rut.length > 0" ng-click="go('/coberturas/' + busqueda.rut)">Go!</button>
             </span>            
-            -->
+       
         </div>
         <span class="help-block">Ejemplo: 12345678-1</span>
-        <!--<span ng-show="form.rut.$error.bvValidarRut">Rut no válido</span>        -->
+       <span ng-show="form.rut.$error.bvValidarRut">Rut no válido</span>    
     </form>
 </div>
+-->
+<!--Hola-->
+<div class="container">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form name="form" ng-submit="submit()" class="form-signin" role="form">
+        <h2 class="form-signin-heading">Liquidador</h2>
+        <input type="text" name="rut" class="form-control" placeholder="Ingrese RUT del titular" ng-placeholder="Ingrese RUT del titular" ng-model="busqueda.rut" required autofocus>
+        <label><span class="help-block">Ejemplo: 12345678-1</span></label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-show="form.rut.$error.bvValidarRut || busqueda.rut.length == 0" >Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-show="!form.rut.$error.bvValidarRut && busqueda.rut.length > 0" ng-click="go('/coberturas/' + busqueda.rut)">Sign in</button>
+    </form>
+    </div>
+    </div>
+</div>
 
+<!--
 <div class="container">
 <div class="row-fluid marketing">
-    <!--<h4>ML Lite</h4>-->
-    <p>
-        Para comenzar, ingrese el RUT del titular.
-    </p>
+    <h4>ML Lite</h4>
+    <p>Para comenzar, ingrese el RUT del titular.</p>
 </div>
 </div>
+-->

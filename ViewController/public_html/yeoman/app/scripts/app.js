@@ -5,7 +5,6 @@ angular.module('mlliteApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  //'ngAnimate',
   'ui.bootstrap'
 ]).config(function ($httpProvider) {
   $httpProvider.defaults.transformRequest = function (data) {
@@ -23,7 +22,7 @@ angular.module('mlliteApp', [
       })
       .when('/prestaciones', {
         templateUrl: 'views/prestaciones.html',
-        controller: 'PrestacionesCtrl'
+        controller:'CargasafiliadoCtrl'
       })
       .otherwise({
         redirectTo: '/'

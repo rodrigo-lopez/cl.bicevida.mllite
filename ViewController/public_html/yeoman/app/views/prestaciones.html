@@ -1,37 +1,54 @@
 <div >
-<accordion close-others="oneAtATime" >      
-        <accordion-group is-open="isPolizaOpen" ng-controller="CargasafiliadoCtrl">
-            <accordion-heading>
-                P&oacute;liza: {{poliza.numeroPoliza}} /  Empleador: {{poliza.nombreEmpleador}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isPolizaOpen, 'glyphicon-chevron-right': !isPolizaOpen}"></i>                
-            </accordion-heading>
-            <div class="form-group">
+
+<div class="panel panel-default">
+  <div class="panel-heading">P&oacute;liza: {{poliza.numeroPoliza}} /  Empleador: {{poliza.empleador.nombre}} </div>
+  <div class="panel-body">
+     <div class="form-group">
+                <!--
                 <label>Plan: </label>
                 <span>{{poliza.nombrePlan}}</span>
-            </div>                             
-        </accordion-group>     
-        <accordion-group is-open="isGrupoOpen" >
+                -->
+                <label>Rut Contratante</label>
+                <span>{{poliza.contratante.rut}}</span>
+                <br/>
+                <label>Nombre Contratante</label>
+                <span>{{poliza.contratante.nombre}}</span>
+                <br/>
+                <label>Rut Empleador</label>
+                <span>{{poliza.empleador.rut}}</span>
+                <br/>
+                <label>Nombre Empleador</label>
+                <span>{{poliza.empleador.nombre}}</span>
+                
+            </div>                  
+  </div>
+</div>
+
+
+<accordion close-others="oneAtATime" >      
+        <accordion-group is-open="true" >
             <accordion-heading>
                 Grupo Familiar <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isGrupoOpen, 'glyphicon-chevron-right': !isGrupoOpen}"></i>
             </accordion-heading>
                 Seleccionar para ver prestaciones m&eacute;dicas
-                <div class="table-responsive" ng-controller="CargasafiliadoCtrl">
+                <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                              <th>Fecha Prestaci&oacute;n</th>
                               <th>RUT</th>
-                              <th>Nombre Beneficiario</th>
-                              <th>Apellido Beneficiario</th>
+                              <th>Nombre</th>
+                              <th>Apellido Paterno</th>
+                              <th>Apellido Materno</th>
                               <th>Parentesco</th>
                             </tr>
                         </thead>
-                        <tbody  style="cursor: pointer" >
+                        <tbody  style="cursor: pointer" ng-repeat="asegurado in grupoFamiliarList" >
                             <tr>
-                              <td>{{poliza.fechaPrestacion}}</td>
-                              <td>{{poliza.rutbeneficiario}}</td>
-                              <td>{{poliza.nombreBeneficiario}}</td>
-                              <td>{{poliza.apellidoBeneficiario}}</td>
-                              <td>{{poliza.parentesco}}</td>
+                              <td>{{asegurado.rut}}</td>
+                              <td>{{asegurado.nombre}}</td>
+                              <td>{{asegurado.primerApellido}}</td>
+                              <td>{{asegurado.segundoApellido}}</td>
+                              <td>{{asegurado.relacion}}</td>
                             </tr>
                         </tbody>
                     </table>          

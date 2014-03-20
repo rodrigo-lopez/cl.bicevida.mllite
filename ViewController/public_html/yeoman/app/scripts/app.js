@@ -20,7 +20,7 @@ angular.module('mlliteApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/prestaciones', {
+      .when('/prestaciones/:rut', {
         templateUrl: 'views/prestaciones.html',
         controller:'CargasafiliadoCtrl'
       })

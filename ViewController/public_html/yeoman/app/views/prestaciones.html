@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody  style="cursor: pointer" ng-repeat="asegurado in grupoFamiliarList" >
-                            <tr>
+                            <tr ng-click="onBeneficiarioSeleccionado(asegurado)">
                               <td>{{asegurado.rut}}</td>
                               <td>{{asegurado.nombre}}</td>
                               <td>{{asegurado.primerApellido}}</td>
@@ -65,12 +65,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="cobertura in poliza.coberturaList">
-                                <td>{{cobertura.nombre}}</td>
-                                <td><input name="total" type="number" class="form-control" ng-model="cobertura.total"/></td>
-                                <td><input name="aporteIsapre" type="number" class="form-control" ng-model="cobertura.aporteIsapre"/></td>                                
-                                <td><input name="copago" type="number" class="form-control" ng-model="cobertura.copago"/></td>
-                                <td class="hidden-xs"><input name="aporteBiceVida" type="number" class="form-control" ng-model="cobertura.aporteBiceVida" readonly/></td>                
+                            <tr ng-repeat="planPrestacion in planPrestacionList">
+                                <td>{{planPrestacion.nombrePrestacion}}</td>
+                                <td><input name="total" type="number" class="form-control" ng-model="planPrestacion.total"/></td>
+                                <td><input name="aporteIsapre" type="number" class="form-control" ng-model="planPrestacion.aporteIsapre"/></td>                                
+                                <td><input name="copago" type="number" class="form-control" ng-model="planPrestacion.copago"/></td>
+                                <td class="hidden-xs"><input name="aporteBiceVida" type="number" class="form-control" ng-model="planPrestacion.aporteBiceVida" readonly/></td>                
                             </tr>
                         </tbody>
                     </table>   

@@ -13,3 +13,12 @@ angular.module('mlliteApp').factory('BuscarGrupoFamiliar', function ($resource, 
     'consultar':   {method:'GET', params:{numeroPoliza: null, rutTitular: null}, isArray: true}
   });
 });
+
+
+angular.module('mlliteApp').factory('BuscarPlanPrestacionPorGrupoTipoBeneficiario', function ($resource, $log) {
+  return $resource('http://localhost:7101/ServiciosColectivos/jersey/polizas/planprestacion/:numeroPoliza/:numeroGrupo/:tipoBeneficiario', null, {
+    'consultar':   {method:'GET', params:{numeroPoliza: null, numeroGrupo: null, tipoBeneficiario: null}, isArray: true}
+  });
+});
+
+

@@ -3,17 +3,7 @@
 angular.module('mlliteApp')
   .controller('CargasafiliadoCtrl', function ($scope, $routeParams, $log, BuscaPolizaPorTitular, BuscarGrupoFamiliar, BuscarPlanPrestacionPorGrupoTipoBeneficiario) {
    //$scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut});
-   $scope.reclamoList = [
-    {
-       codigoPlan: null,
-       codigoPrestacion: null,
-       nombrePrestacion: null,
-       totalPrestacion: null,
-       aporteIsapre: null,
-       copago: null,
-       reembolsoBiceVida: null
-    }
-   ];
+   $scope.reclamoList = [];
    
    $scope.polizaCallback = function (response) {
        $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutTitular: $routeParams.rut});   
@@ -52,6 +42,20 @@ angular.module('mlliteApp')
             $scope.reclamoList[i].reembolsoBiceVida = Math.round(($scope.reclamoList[i].totalPrestacion - $scope.reclamoList[i].aporteIsapre) * 0.8);
             $scope.totalReembolsoBiceVida += $scope.reclamoList[i].reembolsoBiceVida;
         }
+    }
+        
+    
+    $scope.agregarReclamo = function (prestacion) {
+        $scope.reclamoList.push(
+            {
+                planPrestacion: prestacion,
+                totalAtencion: null,
+                montoIsapre: null,
+                totalCalculado: null,
+                estado: null,
+                mensaje: null
+            }
+        );
     }
     
   });

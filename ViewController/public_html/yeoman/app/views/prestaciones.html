@@ -59,10 +59,11 @@
             <div class="form-group" >
                 <label class="col-sm-2 control-label">Prestaciones</label>
                 <div class="col-sm-2">
-                    <select ng-model="planSeleccionado"  ng-options=" planPrestacion.nombrePrestacion for planPrestacion in planPrestacionList | orderBy:'nombrePrestacion'" class="form-control" ></select>
-            
+                    <select ng-model="planSeleccionado"  ng-options=" planPrestacion.nombrePrestacion for planPrestacion in planPrestacionList | orderBy:'nombrePrestacion'" class="form-control" ></select>            
                 </div>
             </div>
+            <button class="btn btn-default" ng-click="agregarReclamo(planSeleccionado)">+</button>
+            <!--
             <div class="form-group"  ng-controller="DatepickerDemoCtrl" >
                 <label class="col-sm-2 control-label">Fecha Prestaci&oacute;n</label>
                 <div class="col-sm-2">
@@ -74,22 +75,32 @@
                 </p>
                 </div>
             </div>
+            -->
         </fieldset>
 
-        <div class="row-fluid" ng-show="planSeleccionado.nombrePrestacion">
+        <div class="row-fluid" ng-show="planSeleccionado != null">
             <table class=" well well-lg table table-condensed" >               
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Fecha Prestaci&oacute;n</th>
                         <th>Total</th>
                         <th>Aporte Isapre</th>
                         <th>Copago</th>
                         <th class="hidden-xs">Monto Reembolso</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody ng-controller="DatepickerDemoCtrl" >
                     <tr ng-repeat="reclamo in reclamoList" >
-                        <td>{{planSeleccionado.nombrePrestacion}}</td>
+                        <td>{{reclamo.planPrestacion.nombrePrestacion}}</td>
+                        <td>
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        </td>
                         <td><input name="totalPrestacion" type="number" class="form-control" ng-model="reclamo.totalPrestacion" ng-required="true"/></td>
                         <td><input name="aporteIsapre" type="number" class="form-control" ng-model="reclamo.aporteIsapre" ng-required="true"/></td>                                
                         <td><input name="copago" type="number" class="form-control" ng-model="reclamo.copago" ng-required="true"/></td>

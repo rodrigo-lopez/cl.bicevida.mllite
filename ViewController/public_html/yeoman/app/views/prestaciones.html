@@ -1,85 +1,109 @@
-<div >
-
 <div class="panel panel-default">
-  <div class="panel-heading">P&oacute;liza: {{poliza.numeroPoliza}} /  Empleador: {{poliza.empleador.nombre}} </div>
+  <div class="panel-heading">
+    <h3 class="panel-title"><b>N&uacute;mero P&oacute;liza: {{poliza.numeroPoliza}}</b></h3>
+    <h3 class="panel-title"><b>Empleador: {{poliza.empleador.nombre}}</b></h3>
+  </div>
   <div class="panel-body">
-     <div class="form-group">
-                <!--
-                <label>Plan: </label>
-                <span>{{poliza.nombrePlan}}</span>
-                -->
-                <label>Rut Contratante</label>
-                <span>{{poliza.contratante.rut}}</span>
-                <br/>
-                <label>Nombre Contratante</label>
-                <span>{{poliza.contratante.nombre}}</span>
-                <br/>
-                <label>Rut Empleador</label>
-                <span>{{poliza.empleador.rut}}</span>
-                <br/>
-                <label>Nombre Empleador</label>
-                <span>{{poliza.empleador.nombre}}</span>
-                
-            </div>                  
+    <div class="form-group">          
+        <label>Rut Contratante : </label>
+        <span>{{poliza.contratante.rut}}</span>
+    </div>
+    <div class="form-group"> 
+        <label>Nombre Contratante : </label>
+        <span>{{poliza.contratante.nombre}}</span>
+    </div>
+    <div class="form-group"> 
+        <label>Rut Empleador : </label>
+        <span>{{poliza.empleador.rut}}</span>
+    </div>
+    <div class="form-group">
+        <label>Nombre Empleador: </label>
+        <span>{{poliza.empleador.nombre}}</span>
+    </div>
   </div>
 </div>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <i class="glyphicon glyphicon-user pull-left"/>
+    <h3 class="panel-title"><b>Grupo Familiar</b></h3>
+  </div>
+  <div class="panel-body">
+    <h6> (*) Seleccionar integrante</h6>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>RUT</th>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Tipo Beneficiario</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="asegurado in grupoFamiliarList"  style="cursor: pointer"  ng-click="onBeneficiarioSeleccionado(asegurado)">
+                <tr ng-class="{well : asegurado == beneficiarioSeleccionado}">
+                    <td>{{asegurado.rut}}</td>
+                    <td>{{asegurado.nombre}}</td>
+                    <td>{{asegurado.primerApellido}}</td>
+                    <td>{{asegurado.segundoApellido}}</td>
+                    <td>{{asegurado.relacion}}</td>
+                </tr>
+            </tbody>
+        </table>          
+    </div>
 
-<accordion close-others="oneAtATime" >      
-        <accordion-group is-open="true" >
-            <accordion-heading>
-                Grupo Familiar <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isGrupoOpen, 'glyphicon-chevron-right': !isGrupoOpen}"></i>
-            </accordion-heading>
-                Seleccionar para ver prestaciones m&eacute;dicas
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                              <th>RUT</th>
-                              <th>Nombre</th>
-                              <th>Apellido Paterno</th>
-                              <th>Apellido Materno</th>
-                              <th>Parentesco</th>
-                            </tr>
-                        </thead>
-                        <tbody  style="cursor: pointer" ng-repeat="asegurado in grupoFamiliarList" >
-                            <tr ng-click="onBeneficiarioSeleccionado(asegurado)">
-                              <td>{{asegurado.rut}}</td>
-                              <td>{{asegurado.nombre}}</td>
-                              <td>{{asegurado.primerApellido}}</td>
-                              <td>{{asegurado.segundoApellido}}</td>
-                              <td>{{asegurado.relacion}}</td>
-                            </tr>
-                        </tbody>
-                    </table>          
+    <form name="formCoberturas" class="css-form" ng-show="beneficiarioSeleccionado != null">
+        <fieldset>
+            <legend><h4>Cobertura Tipo Beneficiario {{beneficiarioSeleccionado.relacion}} - {{beneficiarioSeleccionado.nombre}} {{beneficiarioSeleccionado.primerApellido}} {{asegurado.segundoApellido}}</h4></legend>   
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">Prestaciones</label>
+                <div class="col-sm-2">
+                    <select ng-model="planSeleccionado"  ng-options=" planPrestacion.nombrePrestacion for planPrestacion in planPrestacionList | orderBy:'nombrePrestacion'" class="form-control" ></select>
+            
                 </div>
-                <div class="row-fluid visible-sm visible-md visible-lg visible-print">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Total</th>
-                                <th>Aporte Isapre</th>
-                                <th>Copago</th>
-                                <th class="hidden-xs">Monto Reembolso</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="planPrestacion in planPrestacionList">
-                                <td>{{planPrestacion.nombrePrestacion}}</td>
-                                <td><input name="total" type="number" class="form-control" ng-model="planPrestacion.total"/></td>
-                                <td><input name="aporteIsapre" type="number" class="form-control" ng-model="planPrestacion.aporteIsapre"/></td>                                
-                                <td><input name="copago" type="number" class="form-control" ng-model="planPrestacion.copago"/></td>
-                                <td class="hidden-xs"><input name="aporteBiceVida" type="number" class="form-control" ng-model="planPrestacion.aporteBiceVida" readonly/></td>                
-                            </tr>
-                        </tbody>
-                    </table>   
-                    <i ng-click="prestacionesList()" class="glyphicon glyphicon-plus-sign pull-left" style="color:#009900"/>  
+            </div>
+            <div class="form-group"  ng-controller="DatepickerDemoCtrl" >
+                <label class="col-sm-2 control-label">Fecha Prestaci&oacute;n</label>
+                <div class="col-sm-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
                 </div>
-        </accordion-group>  
-    </accordion>
+            </div>
+        </fieldset>
+
+        <div class="row-fluid" ng-show="planSeleccionado.nombrePrestacion">
+            <table class=" well well-lg table table-condensed" >               
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Total</th>
+                        <th>Aporte Isapre</th>
+                        <th>Copago</th>
+                        <th class="hidden-xs">Monto Reembolso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="reclamo in reclamoList" >
+                        <td>{{planSeleccionado.nombrePrestacion}}</td>
+                        <td><input name="totalPrestacion" type="number" class="form-control" ng-model="reclamo.totalPrestacion" ng-required="true"/></td>
+                        <td><input name="aporteIsapre" type="number" class="form-control" ng-model="reclamo.aporteIsapre" ng-required="true"/></td>                                
+                        <td><input name="copago" type="number" class="form-control" ng-model="reclamo.copago" ng-required="true"/></td>
+                        <td class="hidden-xs"><input name="reembolsoBiceVida" type="number" class="form-control" ng-model="reclamo.reembolsoBiceVida" readonly/></td>                
+                    </tr>
+                </tbody>
+            </table>   
+            <div class="btn-group pull-right"><button class="btn btn-default btn-sm" ng-click="limpiar()">Limpiar</button></div>
+            <div class="btn-group pull-right"><button class="btn btn-default btn-sm" ng-click="calcular()">Calcular</button></div>
+        </div>
+        
+    </form>
+    
+  </div>
+
 </div>
-
-
-
-
+        

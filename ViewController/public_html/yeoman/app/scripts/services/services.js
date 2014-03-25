@@ -21,4 +21,9 @@ angular.module('mlliteApp').factory('BuscarPlanPrestacionPorGrupoTipoBeneficiari
   });
 });
 
+//angular.module('mlliteApp').factory('GuardarReembolsoPorGrupoTipoBeneficiario', function ($resource, $log) {
+ // return $resource('http://localhost:7101/ServiciosColectivos/jersey/polizas/', null, {
+  //  'save':   {method:'POST', headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}}
+ // });
+//});
 

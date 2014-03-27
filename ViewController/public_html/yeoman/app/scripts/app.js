@@ -17,8 +17,8 @@ angular.module('mlliteApp', [
 }).config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
       .when('/prestaciones/:rut', {
         templateUrl: 'views/prestaciones.html',

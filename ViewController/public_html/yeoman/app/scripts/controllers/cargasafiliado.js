@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('mlliteApp')
-  .controller('CargasafiliadoCtrl', function ($scope, $routeParams, $log, BuscaPolizaPorTitular, BuscarGrupoFamiliar, BuscarPlanPrestacionPorGrupoTipoBeneficiario) {
+  .controller('CargasafiliadoCtrl', function ($scope,$routeParams, $log, BuscaPolizaPorTitular, BuscarGrupoFamiliar, BuscarPlanPrestacionPorGrupoTipoBeneficiario) {
    //$scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut});
-   $scope.reclamoList = [];
+   
    
    $scope.polizaCallback = function (response) {
        $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutTitular: $routeParams.rut});   
+      $log.info($scope.grupoFamiliarList);
    }   
    
    $scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut}, $scope.polizaCallback);
@@ -23,6 +24,7 @@ angular.module('mlliteApp')
                                     }
         );
         
+        
    
    }
    
@@ -34,8 +36,14 @@ angular.module('mlliteApp')
                 $scope.reclamoList[i].reembolsoBiceVida =null;
        }
     }
-    
-    $scope.calcular = function(){  
+   $scope.reclamoList = [
+   {
+        reembolsoBiceVida:null,
+        totalPrestacion:null,
+        aporteIsapre:null
+   }
+   ];
+   $scope.calcular = function(){  
         $scope.totalReembolsoBiceVida=0;
         
         for (var i = 0; i < $scope.reclamoList.length; i++) {
@@ -58,4 +66,7 @@ angular.module('mlliteApp')
         );
     }
     
-  });
+});
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mlliteApp')
-  .controller('MainCtrl', ['$scope', '$location', function ($scope, $location) {
+  .controller('LoginCtrl', ['$scope', '$location', function ($scope, $location) {
     $scope.busqueda = {
         "rut": ""
     };

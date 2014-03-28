@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('mlliteApp').factory('BuscaPolizaPorTitular', function ($resource, $log) {
-  return $resource('http://127.0.0.1:7101/ServiciosColectivos/jersey/polizas/titular/:rutTitular', null, {
-    'consultar':   {method:'GET', params:{rutTitular: null}, isArray: false}
+  return $resource('http://127.0.0.1:7101/ServiciosColectivos/jersey/polizas/titular/:rutTitular/:fechaAtencion', null, {
+    'consultar':   {method:'GET', params:{rutTitular: null,fechaAtencion:null}, isArray: false}
   });
 });
 
 
 
 angular.module('mlliteApp').factory('BuscarGrupoFamiliar', function ($resource, $log) {
-  return $resource('http://127.0.0.1:7101/ServiciosColectivos/jersey/polizas/grupofamiliar/:numeroPoliza/:rutTitular', null, {
-    'consultar':   {method:'GET', params:{numeroPoliza: null, rutTitular: null}, isArray: true}
+  return $resource('http://127.0.0.1:7101/ServiciosColectivos/jersey/polizas/grupofamiliar/:numeroPoliza/:rutTitular/:fechaAtencion', null, {
+    'consultar':   {method:'GET', params:{numeroPoliza: null, rutTitular: null, fechaAtencion:null}, isArray: true}
   });
 });
 

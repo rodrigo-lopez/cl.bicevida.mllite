@@ -4,14 +4,21 @@ angular.module('mlliteApp')
   .controller('CargasafiliadoCtrl', function ($scope,$routeParams, $log, BuscaPolizaPorTitular, BuscarGrupoFamiliar, BuscarPlanPrestacionPorGrupoTipoBeneficiario) {
    //$scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut});
    
+
+
+   $scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha}, function (response) {
+        $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha});
+        $log.info($scope.grupoFamiliarList);
+   });
    
+   /*
    $scope.polizaCallback = function (response) {
-       $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutTitular: $routeParams.rut});   
-      $log.info($scope.grupoFamiliarList);
+       $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha});   
    }   
    
-   $scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut}, $scope.polizaCallback);
-    
+   $scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha}, $scope.polizaCallback);
+   
+    */
    $scope.onBeneficiarioSeleccionado = function (beneficiario) {
         $scope.planSeleccionado = {};      
         $scope.beneficiarioSeleccionado = beneficiario;

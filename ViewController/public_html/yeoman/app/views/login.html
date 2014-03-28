@@ -7,18 +7,16 @@
                     <label>Rut Titular</label>
                      
                     <input class="form-control" type="text" name="rut" placeholder="12345678-9"
-                           ng-placeholder="12345678-9" ng-model="busqueda.rut" required="required"
-                           autofocus="autofocus"></input>
+                           ng-placeholder="12345678-9" ng-model="busqueda.rut" required="required" autofocus="autofocus"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha Atenci&oacute;n</label>
                      
-                    <input id="dateAtencion" class="form-control" data-date-format="DD-MM-YYYY"
-                           placeholder="DD-MM-YYYY"></input>
+                    <input class="form-control" type="date" name="fecha" ng-model="busqueda.fecha"></input>
                 </div>
-                <div class="form-group">   
-                    <button class="btn btn-primary" type="submit"
-                            ng-click="go('/prestaciones/' + busqueda.rut)">Ingresar</button>
+                
+                <div class="form-group">
+                    <a class="btn btn-primary" ng-href="#/prestaciones/{{busqueda.rut}}/{{busqueda.fecha}}">Ingresar</a>
                 </div>
             </form>
         </div>

@@ -33,7 +33,7 @@
   </div>
   <div class="panel-body">
    
-    <div class="table-responsive visible-lg">
+    <div class="table-responsive visible-sm visible-md visible-lg">
      <h6> (*) Seleccionar integrante</h6>
         <table class="table table-hover">
             <thead>
@@ -56,29 +56,12 @@
             </tbody>
         </table>          
     </div>
-    <!-- Grupo Familiar en formato Lista, visible para dispositivos pequeños-->
- 
-    <div class="row-fluid visible-xs">
-        <table class="table table-hover">
-         <tbody>
-            <tr ng-repeat="asegurado in grupoFamiliarList" ng-click="onBeneficiarioSeleccionado(asegurado)">
-            <td ><span><strong>{{asegurado.nombre}}{{asegurado.primerApellido}}</strong>
-            <a class="pull-right glyphicon glyphicon-edit" ng-click="ekathuwaModalBasic()"></a></span>
-            </td>
-        
-        </tr>
-        </tbody>
-         </table>
-     </div>
-
-
-
-    <form name="formCoberturas" class="css-form" ng-show="beneficiarioSeleccionado != null">
-        <fieldset>
-            <legend><h4>Cobertura Tipo Beneficiario {{beneficiarioSeleccionado.relacion}} - {{beneficiarioSeleccionado.nombre}} {{beneficiarioSeleccionado.primerApellido}} {{asegurado.segundoApellido}}</h4></legend>   
-        </fieldset>
-
+    
+    <form name="formCoberturas" class="css-form visible-sm visible-md visible-lg" ng-show="beneficiarioSeleccionado != null" >
         <div class="row-fluid" ng-show="planSeleccionado != null">
+            <fieldset>
+                <legend><h4>Cobertura Tipo Beneficiario {{beneficiarioSeleccionado.relacion}} - {{beneficiarioSeleccionado.nombre}} {{beneficiarioSeleccionado.primerApellido}} {{asegurado.segundoApellido}}</h4></legend>   
+            </fieldset> 
             <table class="well table table-bordered">     
                 <thead>
                     <tr>
@@ -91,28 +74,54 @@
                 <tbody>
                     <tr ng-repeat="reclamo in planPrestacionList">
                         <td>{{reclamo.nombrePrestacion}}</td>
-                        <td><input name="totalPrestacion" type="number" class="form-control" ng-model="reclamo.totalPrestacion"/></td>
-                        <td><input name="aporteIsapre" type="number" class="form-control" ng-model="reclamo.aporteIsapre" /></td>                                
-                        <td class="hidden-xs"><input name="reembolsoBiceVida" type="number" class="form-control" ng-model="reclamo.reembolsoBiceVida" readonly="readonly"/></td>                
+                        <td><input name="totalPrestacion" placeholder="$" ng-placeholder="$" type="number" class="form-control" ng-model="reclamo.totalPrestacion"/></td>
+                        <td><input name="aporteIsapre" placeholder="$" ng-placeholder="$" type="number" class="form-control" ng-model="reclamo.aporteIsapre" /></td>                                
+                        <td class="hidden-xs"><input name="reembolsoBiceVida" placeholder="$" ng-placeholder="$" type="number" class="form-control" ng-model="reclamo.reembolsoBiceVida" readonly="readonly"/></td>                
                     </tr>
                 </tbody>
             </table>   
             
             <div class="btn-group pull-right"><button class="btn btn-default btn-sm" ng-click="limpiar()">Limpiar</button></div>
             <div class="btn-group pull-right"><button class="btn btn-default btn-sm" ng-click="calcular()">Calcular</button></div>
-        </div>
-        
+        </div>  
     </form>
-     
-      <!--
-       <div class="row" >
-    <div class="container">
-        <button type="button" class="btn btn-default" ng-click="ekathuwaModalBasic()">Modal - Basic</button>
-    </div>
-    </div>
-    -->
     
+    <!-- Grupo Familiar en formato Lista, visible para dispositivos pequeños-->
+    <div class="row-fluid visible-xs">
+        <table class="table table-hover">
+         <tbody>
+            <tr ng-repeat="asegurado in grupoFamiliarList" ng-click="onBeneficiarioSeleccionado(asegurado)">
+            <td ><span><strong>{{asegurado.nombre}} {{asegurado.primerApellido}} {{asegurado.segundoApellido}}</strong>
+            <a class="pull-right glyphicon glyphicon-edit" ng-href="#"></a></span>
+            </td>
+        </tr>
+        </tbody>
+         </table>
+     </div> 
      
+    <form name="formCoberturas" class="css-form visible-xs" ng-show="beneficiarioSeleccionado != null">
+        <div class="row-fluid" ng-show="planSeleccionado != null">  
+            <h5><strong>Listado de Prestaciones</strong></h5>
+            <table class="well table table-bordered">
+                <tbody ng-repeat="reclamo in planPrestacionList">
+                    <tr>
+                        <td rowspan="3">{{reclamo.nombrePrestacion}}</td>
+                        <td>Monto Total<input name="totalPrestacion" placeholder="$" ng-placeholder="$" type="number" class="form-control" ng-model="reclamo.totalPrestacion"/></td>
+                    </tr>
+                    <tr>
+                        <td>Aporte Isapre<input name="aporteIsapre" placeholder="$" ng-placeholder="$" type="number" class="form-control" ng-model="reclamo.aporteIsapre" /></td>
+                    </tr>
+                    <tr>
+                        <td>Monto Reembolso<input name="reembolsoBiceVida" placeholder="$" ng-placeholder="$" type="number" class="form-control" ng-model="reclamo.reembolsoBiceVida" readonly="readonly"/></td>
+                    </tr>
+                </tbody>       
+            </table> 
+            <div class="btn-group pull-right"><button class="btn btn-default btn-sm" ng-click="limpiar()">Limpiar</button></div>
+            <div class="btn-group pull-right"><button class="btn btn-default btn-sm" ng-click="calcular()">Calcular</button></div>
+        </div>  
+    </form>
+    <!-- Grupo Familiar en formato Lista, visible para dispositivos pequeños-->
+
   </div>
 
 </div>

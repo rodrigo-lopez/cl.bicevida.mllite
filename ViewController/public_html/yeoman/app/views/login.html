@@ -4,19 +4,19 @@
             <form class="form" name="form" role="form" ng-submit="submit()">
                 <h3 class="form-signin-heading">Liquidador de Reembolsos</h3>
                 <div class="form-group">
-                    <label>Rut Titular</label>
+                    <label>Rut Asegurado</label>
                      
                     <input class="form-control" type="text" name="rut" placeholder="12345678-9"
-                           ng-placeholder="12345678-9" ng-model="busqueda.rut" required="required" autofocus="autofocus"></input>
+                           ng-placeholder="12345678-9" ng-model="busqueda.rutAsegurado" required="required" autofocus="autofocus"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha Atenci&oacute;n</label>
                      
-                    <input class="form-control" type="date" name="fecha" ng-model="busqueda.fecha"></input>
+                    <input class="form-control" type="date" name="fechaAtencion" ng-model="busqueda.fechaAtencion"></input>
                 </div>
                 
                 <div class="form-group">
-                    <a class="btn btn-primary" ng-href="#/prestaciones/{{busqueda.rut}}/{{busqueda.fecha}}">Ingresar</a>
+                    <a class="btn btn-primary" ng-href="#/prestaciones/{{busqueda.rutAsegurado}}/{{busqueda.fechaAtencion}}/{{busqueda.rutUsuario}}">Ingresar</a>
                 </div>
             </form>
         </div>

@@ -6,33 +6,24 @@ angular.module('mlliteApp')
    
 
 
-   $scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha}, function (response) {
-        $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha});
-        $log.info($scope.grupoFamiliarList);
+   $scope.poliza = BuscaPolizaPorTitular.consultar({rutAsegurado: $routeParams.rutAsegurado,fechaAtencion: $routeParams.fechaAtencion,rutUsuario: $routeParams.rutUsuario}, 
+                                                    function (response) {
+                                                        $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutAsegurado: $routeParams.rutAsegurado,fechaAtencion: $routeParams.fechaAtencion});
+
    });
    
-   /*
-   $scope.polizaCallback = function (response) {
-       $scope.grupoFamiliarList = BuscarGrupoFamiliar.consultar({numeroPoliza: $scope.poliza.numeroPoliza, rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha});   
-   }   
-   
-   $scope.poliza = BuscaPolizaPorTitular.consultar({rutTitular: $routeParams.rut,fechaAtencion: $routeParams.fecha}, $scope.polizaCallback);
-   
-    */
    $scope.onBeneficiarioSeleccionado = function (beneficiario) {
         $scope.planSeleccionado = {};      
         $scope.beneficiarioSeleccionado = beneficiario;
-        $scope.planPrestacionList = BuscarPlanPrestacionPorGrupoTipoBeneficiario.consultar({numeroPoliza: $scope.poliza.numeroPoliza,
-                                    numeroGrupo: beneficiario.numeroGrupo, 
-                                    tipoBeneficiario: beneficiario.relacion}, 
-                                    function (data) {
-                                        $log.info(data);
-                                        $scope.planSeleccionado= data[0].nombrePrestacion;
+        $scope.planPrestacionList = BuscarPlanPrestacionPorGrupoTipoBeneficiario.consultar(
+                                    {numeroPoliza: $scope.poliza.numeroPoliza,
+                                     numeroGrupo: beneficiario.numeroGrupo, 
+                                     numeroAsegurado : beneficiario.numeroAsegurado,
+                                     numeroCarga : beneficiario.numeroCarga
                                     }
+        
         );
-        
-        
-   
+        $log.info($scope.planPrestacionList);
    }
    
    $scope.limpiar = function () {

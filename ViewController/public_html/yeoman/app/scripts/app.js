@@ -20,9 +20,12 @@ angular.module('mlliteApp', [
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/prestaciones/:rut/:fecha', {
+      .when('/prestaciones/:rutAsegurado/:fechaAtencion/:rutUsuario', {
         templateUrl: 'views/prestaciones.html',
         controller:'CargasafiliadoCtrl'
+      })
+      .when('/informacionGF', {
+        templateUrl: 'views/informacionGF.html'
       })
       .otherwise({
         redirectTo: '/'

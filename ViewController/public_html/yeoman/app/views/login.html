@@ -1,22 +1,25 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form" name="form" role="form" ng-submit="submit()">
+            <form class="form" name="form" role="form" ng-submit="submitForm()" novalidate>
+                <div class="alert alert-danger alert-dismissable" ng-show="form.rut.$error.bvValidarRut">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Error! </strong>Formato de Rut no v&aacute;lido.
+                </div> 
+                
                 <h3 class="form-signin-heading">Liquidador de Reembolsos</h3>
                 <div class="form-group">
-                    <label>Rut Asegurado</label>
+                    <label>Rut Asegurado Titular</label>
                      
-                    <input class="form-control" type="text" name="rut" placeholder="12345678-9"
-                           ng-placeholder="12345678-9" ng-model="busqueda.rutAsegurado" required="required" autofocus="autofocus"></input>
+                    <input class="form-control" type="text" name="rut" bv-validar_rut  placeholder="12345678-9" ng-model="busqueda.rutAsegurado" ></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha Atenci&oacute;n</label>
                      
-                    <input class="form-control" type="date" name="fechaAtencion" ng-model="busqueda.fechaAtencion"></input>
+                    <input class="form-control" value="date" type="date" name="fechaAtencion" ng-model="busqueda.fechaAtencion"></input>
                 </div>
-                
                 <div class="form-group">
-                    <a class="btn btn-primary" ng-href="#/prestaciones/{{busqueda.rutAsegurado}}/{{busqueda.fechaAtencion}}/{{busqueda.rutUsuario}}">Ingresar</a>
+                    <a class="btn btn-primary pull-right" ng-href="#/prestaciones/{{busqueda.rutAsegurado}}/{{busqueda.fechaAtencion}}/{{busqueda.rutUsuario}}">Continuar</a>
                 </div>
             </form>
         </div>

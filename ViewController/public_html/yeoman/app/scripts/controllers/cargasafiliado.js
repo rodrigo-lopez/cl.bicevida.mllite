@@ -27,11 +27,11 @@ angular.module('mlliteApp')
    }
    
    $scope.limpiar = function () {
-       for (var i = 0; i < $scope.reclamoList.length; i++) {
-                $scope.reclamoList[i].totalPrestacion = null;
-                $scope.reclamoList[i].aporteIsapre = null;
-                $scope.reclamoList[i].copago = null
-                $scope.reclamoList[i].reembolsoBiceVida =null;
+       for (var i = 0; i < $scope.planPrestacionList.length; i++) {
+                $scope.planPrestacionList[i].totalPrestacion = null;
+                $scope.planPrestacionList[i].aporteIsapre = null;
+                $scope.planPrestacionList[i].montoReclamado = null
+                $scope.planPrestacionList[i].reembolsoBiceVida =null;
        }
     }
    $scope.reclamoList = [
@@ -41,12 +41,10 @@ angular.module('mlliteApp')
         aporteIsapre:null
    }
    ];
-   $scope.calcular = function(){  
-        $scope.totalReembolsoBiceVida=0;
-        
-        for (var i = 0; i < $scope.reclamoList.length; i++) {
-            $scope.reclamoList[i].reembolsoBiceVida = Math.round(($scope.reclamoList[i].totalPrestacion - $scope.reclamoList[i].aporteIsapre) * 0.8);
-            $scope.totalReembolsoBiceVida += $scope.reclamoList[i].reembolsoBiceVida;
+
+   $scope.calcular = function(){   
+        for (var i = 0; i < $scope.planPrestacionList.length; i++) {
+            $scope.planPrestacionList[i].montoReclamado = $scope.planPrestacionList[i].totalPrestacion - $scope.planPrestacionList[i].aporteIsapre;
         }
     }
         

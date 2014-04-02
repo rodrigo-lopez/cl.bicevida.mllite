@@ -1,14 +1,45 @@
-<!-- Button to launch modal popover -->
-<a href="#popupBottom" role="button" class="btn" data-toggle="modal-popover" data-placement="bottom">Bottom</a>
- 
-<!-- Define content -->
-<div id="popupBottom" class="popover">
-    <div class="arrow"></div>
-    <h3 class="popover-title">Bottom</h3>
-    <div class="popover-content">
-        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. 
-            Pellentesque ornare sem lacinia quam venenatis vestibulum.
-            <a href="#" class="btn helloWorld">Click me</a>
-        </p>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
 </div>
+<!-- sometime later, probably inside your on load event callback -->
+<script>
+    $("#myModal").on("show", function() {    // wire up the OK button to dismiss the modal when shown
+        $("#myModal a.btn").on("click", function(e) {
+            console.log("button pressed");   // just as an example...
+            $("#myModal").modal('hide');     // dismiss the dialog
+        });
+    });
+ 
+    $("#myModal").on("hide", function() {    // remove the event listeners when the dialog is dismissed
+        $("#myModal a.btn").off("click");
+    });
+    
+    $("#myModal").on("hidden", function() {  // remove the actual elements from the DOM when fully hidden
+        $("#myModal").remove();
+    });
+    
+    $("#myModal").modal({                    // wire up the actual modal functionality and show the dialog
+      "backdrop"  : "static",
+      "keyboard"  : true,
+      "show"      : true                     // ensure the modal is shown immediately
+    });
+</script>

@@ -24,9 +24,6 @@ angular.module('mlliteApp', [
         templateUrl: 'views/prestaciones.html',
         controller:'CargasafiliadoCtrl'
       })
-      .when('/informacionGF', {
-        templateUrl: 'views/informacionGF.html'
-      })
       .otherwise({
         redirectTo: '/'
       });

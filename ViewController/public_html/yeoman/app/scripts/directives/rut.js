@@ -1,6 +1,6 @@
 'use strict';
 
-var RUT_REGEXP = /(^[0-9]{1,8}-[\d|K]$)|(^[0-9]{1,2}[.][0-9]{1,3}[.][0-9]{1,3}-[\d|K])|(^[0-9]{1,8}[\d|K]$)/i;
+var RUT_REGEXP = /(^[0-9]{1,8}-[\d|K]$)|(^[0-9]{1,2}[.][0-9]{1,3}[.][0-9]{1,3}-[\d|K])/i;
 
 angular.module('mlliteApp')
   .directive('bvValidarRut', function () {

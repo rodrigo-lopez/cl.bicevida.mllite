@@ -8,5 +8,4 @@ angular.module('mlliteApp')
         fechaAtencion:"",
         rutUsuario:"11610087-8"
     };
-
   }]);

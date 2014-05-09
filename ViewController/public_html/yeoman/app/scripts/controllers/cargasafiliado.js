@@ -2,7 +2,7 @@
 
 angular.module('mlliteApp')
   .controller('CargasafiliadoCtrl', ['$scope','$routeParams','$log','BuscaPolizaPorTitular','BuscarGrupoFamiliar','BuscarPlanPrestacionBasicaPorTipoBeneficiario','BuscarPlanPrestacionPorGrupoTipoBeneficiario','BuscarTipoDocumentoPrestacion',function ($scope,$routeParams, $log, BuscaPolizaPorTitular, BuscarGrupoFamiliar, BuscarPlanPrestacionBasicaPorTipoBeneficiario,BuscarPlanPrestacionPorGrupoTipoBeneficiario,BuscarTipoDocumentoPrestacion) {
-    
+    //Variables Globales
     $scope.prestacionBasica = false;
     $scope.prestacionesListado = false;
     $scope.agregarDocumento = false;

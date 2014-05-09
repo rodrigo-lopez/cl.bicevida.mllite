@@ -1,12 +1,11 @@
 <div class="container">
-    <div class="panel">
         <legend><strong>Solicitud de Reembolso</strong></legend>
     
         <!-- Visible para Ordenadores Grandes -->
         <accordion close-others="oneAtATime" class="visible-md visible-lg">
             <accordion-group is-open="isPolizaOpen">
                 <accordion-heading>
-                   <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isPolizaOpen, 'glyphicon-chevron-right': !isPolizaOpen}"></i><h3 class="panel-title"><b>Empleador {{poliza.empleador.nombre}}   (N&deg; P&oacute;liza {{poliza.numeroPoliza}})</b></h3>
+                   <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isPolizaOpen, 'glyphicon-chevron-right': !isPolizaOpen}"></i><h3 class="panel-title">Empleador: <b>{{poliza.empleador.nombre}}   (N&deg; P&oacute;liza {{poliza.numeroPoliza}})</b></h3>
                 </accordion-heading>
                 <ul class="form-group" type="square">
                     <li>Nombre Contratante</li><lu><b>{{poliza.contratante.nombre}}</b></lu>
@@ -17,6 +16,7 @@
             </accordion-group>
         </accordion>
         <br>
+        
         <div class="panel panel-default visible-md visible-lg">
             <div class="panel-heading"><h3 class="panel-title"><b>Grupo Familiar</b></h3></div>
             <div class="panel-body">
@@ -43,9 +43,36 @@
                         </tbody>
                     </table>          
                 </div> 
-                <form  name="formCoberturas" class="css-form" ng-show="beneficiarioSeleccionado != null">
-                    <div class="row-fluid" ng-show="planSeleccionado != null">
-                        <legend><h5>Cobertura disponible para : <strong> {{beneficiarioSeleccionado.nombre}} {{beneficiarioSeleccionado.primerApellido}} {{beneficiarioSeleccionado.segundoApellido}}  ({{beneficiarioSeleccionado.relacion}})</strong></h5></legend>
+            </div>  
+        </div>  
+
+
+        <form  name="formTipoPrestacion" class="css-form" ng-show="beneficiarioSeleccionado != null && prestacionBasica !=false">
+            <div  class="panel panel-default visible-md visible-lg">
+                <div class="panel-body">
+                    <h3 class="panel-title">Seleccionar Tipo Prestaci&oacute;n para : <strong> {{beneficiarioSeleccionado.nombre}} {{beneficiarioSeleccionado.primerApellido}} {{beneficiarioSeleccionado.segundoApellido}}  ({{beneficiarioSeleccionado.relacion}})</strong></h3>
+                    <legend></legend>
+                    <div class="control-group">
+                        <div class="controls span2">
+                            <label class="radio"  ng-repeat="option in planPrestacionBasicaList">
+                                <input type="radio" name="prestacionBasica" value="prestacionBasica" ng-model="prestacionBasica" ng-click="onbuscarPrestaciones(option,beneficiarioSeleccionado)"> {{option.descripcionBasica}}</input>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>   
+
+        <form  name="formListadoPrestacion" class="css-form" ng-show="tipoPrestacionSeleccionada != null && prestacionesListado!=false">    
+            <div class="panel panel-default visible-md visible-lg">
+                <div class="panel-body">
+                    <div ng-show="tipoPrestacionSeleccionada.prestacionBasica =='AMB'">     
+                        <h3 class="panel-title">Prestaci&oacute;n <strong>{{tipoPrestacionSeleccionada.descripcionBasica}}</strong></h3>
+                        <legend></legend>
+                        <div class="alert alert-danger" ng-show="error!= false"><a class="close" data-dismiss="alert">&times;</a>  
+                           <strong>Error!</strong> 
+                           Valor <u>Aporte Isapre</u> debe ser menor que <u>Monto Total</u>
+                        </div>
                         <table class="well table table-bordered">     
                             <thead>
                                 <tr>
@@ -56,33 +83,140 @@
                                     <th class="hidden-xs">Monto Reembolso</th>
                                 </tr>
                             </thead>
-                            <tbody ng-repeat="reclamo in planPrestacionList ">
+                            <tbody ng-repeat="reclamo in planPrestacionList |orderBy: nombrePrestacion">
                                 <tr>
                                     <td>{{reclamo.nombrePrestacion}}</td>
-                                    <td><input name="totalPrestacion" type="text" separador-miles="true" placeholder="$" class="form-control" ng-model="reclamo.totalPrestacion" data="reclamo.totalPrestacion"></input></td>
-                                    <td><input name="aporteIsapre" type="text" separador-miles="true" placeholder="$" class="form-control" ng-model="reclamo.aporteIsapre" data="reclamo.aporteIsapre" ></input></td>                                
-                                    <td><input name="montoReclamado" ng-click = "sumar()" type="text" placeholder="$" class="form-control"  readonly="readonly"  ng-model="reclamo.montoReclamado" ></input></td>              
+                                    <td><input name="totalPrestacion" type="text" separador-Miles placeholder="$" class="form-control" ng-model="reclamo.totalPrestacion"></input></td>
+                                    <td><input name="aporteIsapre" type="text" ng-blur= "sumar()" separador-Miles placeholder="$" class="form-control" ng-model="reclamo.aporteIsapre"></input></td>                                
+                                    <td><input name="montoReclamado" type="text"  placeholder="$" class="form-control" ng-model="reclamo.montoReclamado" readonly="readonly"  ></input></td>              
                                     <td><input name="reembolsoBiceVida" type="text"  placeholder="$" class="form-control" readonly="readonly"/></td> 
                                 </tr>
                             </tbody>
+                             <tbody>
                             <tr>
                                 <td colspan="4"></td>
                                 <td>Total Reembolso<input name="totalMontoReembolso" type="text"  placeholder="$" class="form-control"  readonly="readonly"></input></td>
                             </tr> 
+                             </tbody>
                         </table>   
                         <div class="btn-group pull-center"><button class="btn btn-primary btn-sm" ng-click="limpiar()">Limpiar</button></div>
                         <div class="btn-group pull-right"><button class="btn btn-success btn-sm" ng-click="calcular()">Calcular</button></div>
-                    </div>  
-                </form>
+                    </div>
+                    
+                    <div ng-show="tipoPrestacionSeleccionada.prestacionBasica =='HOS'">   
+                        <h3 class="panel-title">Prestaci&oacute;n <strong>{{tipoPrestacionSeleccionada.descripcionBasica}}</strong></h3>
+                        <legend></legend>
+                        <table class="table table-bordered" ng-show="ocultarTabla!= false">     
+                            <thead class="well">
+                                <tr>
+                                    <th>Tipo Prestaci&oacute;n</th>
+                                    <th>Tipo Documento</th>
+                                    <th>Descripci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="resumen in listaResumen|orderBy: nombrePrestacion">
+                                <tr>
+                                    <td>{{resumen.nombrePrestacion}}</td>
+                                    <td>{{resumen.tipoDocumento}}</td>
+                                    <td>{{resumen.texto}}</td>
+                                    <td><a href ng-click="listaResumen.splice($index, 0)">X</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary btn-sm pull-left" ng-click="agregarDocumento()">Agregar Documento</button>
+                                <button ng-show="botonTerminar!=false" class="btn btn-primary btn-sm pull-right" ng-click="terminar()">Terminar e Imprimir</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="well" ng-show="addDocumento!= false">
+                            <div  class="row" >
+                                <label for="prestacion" class="col-sm-4 control-label">Prestaci&oacute;n</label>
+                                <div class="col-sm-6">
+                                    <select data-style="btn-primary" class="form-control" ng-model="formListadoPrestacion.nombrePrestacion" ng-options="r.nombrePrestacion for r in planPrestacionList "></select>
+                                </div>
+                            </div> 
+                            <br>
+                            <div  class="row" >
+                                <label for="tipoDocumento" class="col-sm-4 control-label">Tipo de Documento</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" ng-options="r.descripcionTipoDocumento for r in tipoDocumentoPrestacion" ng-model="formListadoPrestacion.descripcionTipoDocumento"></select>
+                                </div>
+                            </div>
+                            <br>
+                            <div  class="row" >
+                                <label for="tipoDocumento" class="col-sm-4 control-label">Descripcion Documento</label>
+                                <div class="col-sm-6">
+                                    <textarea class="form-control" ng-model= "formListadoPrestacion.textoDescripcion" rows="4" cols="2"></textarea>
+                                </div>
+                            </div>   
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary btn-sm pull-right" ng-click="guardar(formListadoPrestacion.nombrePrestacion,formListadoPrestacion.descripcionTipoDocumento,formListadoPrestacion.textoDescripcion)">Guardar</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-danger btn-sm pull-right" ng-click="enviar()">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    
+
+                </div>
             </div>
-        </div>
+        </form>
+       
+     <!--
+        <form  name="formCoberturas" class="css-form" ng-show="beneficiarioSeleccionado != null">
+                    
+                    <div class="row-fluid">
+                                                
+                        <div ng-show="prestacionSeleccionada.prestacionBasica =='AMB'">                      
+                            <table class="well table table-bordered">     
+                                <thead>
+                                    <tr>
+                                        <th>Prestaci&oacute;n</th>
+                                        <th>Monto Total</th>
+                                        <th>Aporte Isapre</th>
+                                        <th>Monto Reclamado</th>
+                                        <th class="hidden-xs">Monto Reembolso</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="reclamo in planPrestacionList |orderBy: nombrePrestacion">
+                                    <tr>
+                                        <td>{{reclamo.nombrePrestacion}}</td>
+                                        <td><input name="totalPrestacion" type="text" separador-miles="true" placeholder="$" class="form-control" ng-model="reclamo.totalPrestacion"></input></td>
+                                        <td><input name="aporteIsapre" type="text" separador-miles="true" placeholder="$" class="form-control" ng-model="reclamo.aporteIsapre"></input></td>                                
+                                        <td><input name="montoReclamado" ng-click = "sumar()" type="text" placeholder="$" class="form-control" ng-model="reclamo.montoReclamado" readonly="readonly"  ></input></td>              
+                                        <td><input name="reembolsoBiceVida" type="text"  placeholder="$" class="form-control" readonly="readonly"/></td> 
+                                    </tr>
+                                </tbody>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>Total Reembolso<input name="totalMontoReembolso" type="text"  placeholder="$" class="form-control"  readonly="readonly"></input></td>
+                                </tr> 
+                            </table>   
+                           
+                            <div class="btn-group pull-center"><button class="btn btn-primary btn-sm" ng-click="limpiar()">Limpiar</button></div>
+                            <div class="btn-group pull-right"><button class="btn btn-success btn-sm" ng-click="calcular()">Calcular</button></div>
+                       </div>
+                 
+                    </div>  
+        </form>
+         
+         -->   
+            
+            
+        
         <!-- Visible para Ordenadores Grandes -->
     
-        <!-- Visible para  visible para dispositivos pequeños -->
+  <!--
         <accordion close-others="oneAtATime" class="css-form visible-xs visible-sm">
             <accordion-group is-open="isPolizaOpen">
                 <accordion-heading>
-                    <b>Empleador {{poliza.empleador.nombre}}</b>
+                    Empleador: <b>{{poliza.empleador.nombre}}</b>
                     <span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isPolizaOpen, 'glyphicon-chevron-right': !isPolizaOpen}"></span>     
                 </accordion-heading>
                 <ul class="form-group" type="square">
@@ -100,9 +234,9 @@
             <div class="panel-body">
                 <div class="row-fluid">
                     <table class="table table-hover">
-                        <tbody  ng-repeat="asegurado in grupoFamiliarList| orderBy: asegurado.relacion" ng-click="onBeneficiarioSeleccionado(asegurado)">
-                            <tr>
-                                <td ng-class="{well : asegurado == beneficiarioSeleccionado}">
+                        <tbody style="cursor: pointer">
+                            <tr ng-repeat="asegurado in grupoFamiliarList| orderBy: asegurado.relacion" ng-click="onBeneficiarioSeleccionado(asegurado)" ng-class="{well : asegurado == beneficiarioSeleccionado}">
+                                <td>
                                     <span><strong>{{asegurado.nombre}} {{asegurado.primerApellido}} {{asegurado.segundoApellido}}</strong><a class="pull-right glyphicon glyphicon-edit" data-toggle="modal"  data-target="#myModal"></a></span>
                                 </td>
                             </tr>     
@@ -129,8 +263,52 @@
                 </div> 
                 <form name="formCoberturas" class="css-form" ng-show="beneficiarioSeleccionado != null">
                     <div class="row-fluid" ng-show="planSeleccionado != null">  
-                        <legend></legend>
-                        <h5>Cobertura disponible para : <strong> {{beneficiarioSeleccionado.nombre}}{{beneficiarioSeleccionado.primerApellido}} {{beneficiarioSeleccionado.segundoApellido}} ({{beneficiarioSeleccionado.relacion}})</strong></h5>
+                        <legend><h5>Seleccionar Prestaci&oacute;n B&aacute;sica para : <strong> {{beneficiarioSeleccionado.nombre}} {{beneficiarioSeleccionado.primerApellido}} {{beneficiarioSeleccionado.segundoApellido}}  ({{beneficiarioSeleccionado.relacion}})</strong></h5></legend>
+                                            
+                        <div class="control-group">
+                            <div class="controls span2">
+                                <label class="radio"  ng-repeat="option in planPrestacionBasicaList">
+                                    <input type="radio" name="option.descripcionBasica" value="option.prestacionBasica" ng-click="buscarPrestaciones(option,beneficiarioSeleccionado)"> {{option.descripcionBasica}}</input>
+                                </label>
+                            </div>
+                        </div>
+                    
+                        <div ng-show="prestacionSeleccionada.prestacionBasica =='HOS'">                      
+                            <div class="well">
+                                <div  class="row" >
+                                    <label for="prestacion" class="col-sm-4 control-label">Prestaci&oacute;n</label>
+                                    <div class="col-sm-4">
+                                        <select data-style="btn-primary" class="form-control" ng-model="formCoberturas.nombrePrestacion" ng-options="r.nombrePrestacion for r in planPrestacionList "></select>
+                                    </div>
+                                </div> 
+                                <br>
+                                <div  class="row" >
+                                    <label for="tipoDocumento" class="col-sm-4 control-label">Tipo de Documento</label>
+                                    <div class="col-sm-4">
+                                        <select data-style="btn-primary" class="form-control" >
+                                                <option>Boleta de Honorarios</option>
+                                                <option>Boleta de Honorarios Electronica</option>
+                                        </select>
+                                        <br>
+                                        <input name="archivo" type="file"></input>
+                                        <br>
+                                    </div>
+                                </div> 
+                                <div  class="row" >
+                                    <label for="totalPrestacion" class="col-sm-4 control-label">Total Prestaci&oacute;n</label>
+                                    <div class="col-sm-4">
+                                    <input name="totalPrestacion" type="text" separador-miles="true" placeholder="$" class="form-control" ng-model="reclamo.totalPrestacion"></input>
+                                    </div>
+                                </div>                        
+                                <div class="row">
+                                    <button class="btn btn-primary btn-sm pull-right" ng-click="enviar()">Enviar</button>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                         <div ng-show="prestacionSeleccionada.prestacionBasica =='AMB'">   
+                      <h5>Cobertura disponible para : <strong> {{beneficiarioSeleccionado.nombre}}{{beneficiarioSeleccionado.primerApellido}} {{beneficiarioSeleccionado.segundoApellido}} ({{beneficiarioSeleccionado.relacion}})</strong></h5>
+                
                         <table class="well table table-bordered">
                             <tbody ng-repeat="reclamo in planPrestacionList">
                                 <tr>
@@ -153,10 +331,10 @@
                         </table>
                         <div class="btn-group pull-center"><button class="btn btn-primary btn-sm" ng-click="limpiar()">Limpiar</button></div>
                         <div class="btn-group pull-right"><button class="btn btn-success btn-sm" ng-click="calcular()">Calcular</button></div>
+                </div>
                 </div>  
                 </form>
           </div>
         </div>
-        <!-- Visible para  visible para dispositivos pequeños -->
-    </div>
+-->
 </div>

@@ -138,8 +138,6 @@ input[type="number"]{
     left:-100%;
 }
 
-
-
 .input-group-btn:not([style*="display:none"]):not([style*="display: none"]):last-child > .btn {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;

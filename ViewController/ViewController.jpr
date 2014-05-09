@@ -79,7 +79,7 @@
    </hash>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
       <hash n="profileDefinitions">
-         <hash n="MLLite_Project1_webapp">
+         <hash n="WAR_ML">
             <hash n="appletArchives"/>
             <hash n="appletFiles">
                <value n="autoInclude" v="true"/>
@@ -90,7 +90,7 @@
             <hash n="archiveOptions">
                <value n="hasManifest" v="false"/>
             </hash>
-            <value n="enterpriseAppName" v="MLLite_Project1_webapp"/>
+            <value n="enterpriseAppName" v="WAR_ML"/>
             <hash n="fileGroups">
                <list n="groups">
                   <hash>
@@ -104,10 +104,6 @@
                         <list n="rules">
                            <hash>
                               <value n="pattern" v="yeoman/"/>
-                              <value n="type" v="1"/>
-                           </hash>
-                           <hash>
-                              <value n="pattern" v="cl.bicevida.mllite/"/>
                               <value n="type" v="1"/>
                            </hash>
                            <hash>
@@ -154,21 +150,30 @@
                   </hash>
                </list>
             </hash>
-            <url n="jarURL" path="deploy/MLLite_Project1_webapp.war"/>
+            <url n="jarURL" path="deploy/WAR_ML.war"/>
             <hash n="libraryDependencies">
                <value n="IncludeLibrariesFromOtherContainers" v="true"/>
             </hash>
             <value n="profileClass" v="oracle.jdeveloper.deploy.war.WarProfile"/>
-            <value n="profileName" v="MLLite_Project1_webapp"/>
+            <value n="profileName" v="WAR_ML"/>
          </hash>
       </hash>
       <list n="profileList">
-         <string v="MLLite_Project1_webapp"/>
+         <string v="WAR_ML"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
       <value n="j2eeWebAppName" v="MLLite-ViewController-webapp"/>
       <value n="j2eeWebContextRoot" v="sec/sc/mllite"/>
+   </hash>
+   <hash n="oracle.jdeveloper.runner.RunConfigurations">
+      <hash n="runConfigurationDefinitions">
+         <hash n="Default">
+            <value n="custom" v="false"/>
+            <value n="name" v="Default"/>
+            <url n="targetURL" path="src/"/>
+         </hash>
+      </hash>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
@@ -277,6 +282,11 @@
          </hash>
       </list>
    </hash>
+   <hash n="oracle.jdevimpl.webapp.jsp.JspVeProjectSettings">
+      <list n="servlet_listeners">
+         <string v="com.sun.faces.config.ConfigureListener"/>
+      </list>
+   </hash>
    <hash n="oracle.jdevimpl.webapp.jsp.libraries.model.ProjectTagLibraries">
       <list n="tag-libraries">
          <hash>
@@ -302,6 +312,9 @@
             <value n="version" v="2.0"/>
          </hash>
       </list>
+   </hash>
+   <hash n="ResourceBundleOptions">
+      <list n="RegisteredResourceBundles"/>
    </hash>
    <hash n="XmlTranslatorOptions">
       <value n="wfCheckOnCompile" v="false"/>

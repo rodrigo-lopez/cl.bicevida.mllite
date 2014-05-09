@@ -24,6 +24,10 @@ angular.module('mlliteApp', [
         templateUrl: 'views/prestaciones.html',
         controller:'CargasafiliadoCtrl'
       })
+      .when('/tipoprestacion/:prestacionBasica/:numeroGrupo/:numeroAsegurado/:numeroCarga/:numeroPoliza', {
+        templateUrl: 'views/tipoprestacion.html',
+        controller:'TipoprestacionCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

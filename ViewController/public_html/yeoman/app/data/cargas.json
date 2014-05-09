@@ -1,0 +1,21 @@
+{
+    "numeroPoliza": "14008",
+    "inicioVigencia": "01/01/2014",
+    "terminoVigencia": "31/12s/2014",
+    "empleadorList": {"rut": "98888888-8", "nombre": "Anglo America"},
+    "romina":"romina silva acum",
+     "rutcontratante": 666666666, 
+     "nombreContratante": "Caja La Araucana",
+     "nombreEmpleador": "Anglo America",
+     "rutEmpleador": 988888888,
+     "nombrePlan": "3450-Catastrofico",
+     "fechaPrestacion": "28/02/2014",
+     "rutbeneficiario": 7777777776, 
+     "nombreBeneficiario": "Carolina", 
+     "apellidoBeneficiario": "Fuenzalida",
+     "parentesco": "Hija",
+     "coberturaList" :[
+                        {"nombre":"Consultas Medicas"},
+                        {"nombre":"Procedimientos de Apoyo"}
+                        ]
+}

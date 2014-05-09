@@ -1,0 +1,83 @@
+<div ng-show="prestacionBasica == 'AMB'">
+<div class="container">
+    <div class="panel">           
+    <table class="well table table-bordered">     
+        <thead> 
+            <tr>
+                <th>Prestaci&oacute;n</th>
+                <th>Monto Total</th>
+                <th>Aporte Isapre</th>
+                <th>Monto Reclamado</th>
+                <th class="hidden-xs">Monto Reembolso</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="reclamo in planPrestacionList |orderBy: nombrePrestacion">
+            <tr>
+                <td>{{reclamo.nombrePrestacion}}</td>
+                <td><input name="totalPrestacion" type="text" separador-miles="true" placeholder="$" class="form-control" ng-model="reclamo.totalPrestacion"></input></td>
+                <td><input name="aporteIsapre" type="text" separador-miles="true" placeholder="$" class="form-control" ng-model="reclamo.aporteIsapre"></input></td>                                
+                <td><input name="montoReclamado" ng-click = "sumar()" type="text" placeholder="$" class="form-control" ng-model="reclamo.montoReclamado" readonly="readonly"  ></input></td>              
+                <td><input name="reembolsoBiceVida" type="text"  placeholder="$" class="form-control" readonly="readonly"/></td> 
+            </tr>
+        </tbody>
+        <tr>
+            <td colspan="4"></td>
+            <td>Total Reembolso<input name="totalMontoReembolso" type="text"  placeholder="$" class="form-control"  readonly="readonly"></input></td>
+        </tr> 
+    </table>   
+   
+    <div class="btn-group pull-center"><button class="btn btn-primary btn-sm" ng-click="limpiar()">Limpiar</button></div>
+    <div class="btn-group pull-right"><button class="btn btn-success btn-sm" ng-click="calcular()">Calcular</button></div>
+</div>
+</div>
+</div>
+<div ng-show="prestacionBasica == 'HOS'">
+<form  name="formPrestaciones" class="css-form" ng-submit="agregar()">
+<div class="container">
+    <div class="panel">                  
+        <div class="well">
+        <table class="well table table-bordered">     
+            <thead> 
+                <tr>
+                    <th>Prestaci&oacute;n</th>
+                    <th>Seleccionar</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="reclamo in planPrestacionList |orderBy: nombrePrestacion">
+                <tr>
+                    <td ng-model="prestacionSeleccionada" >{{reclamo.nombrePrestacion}}</td>
+                    <td><input type="checkbox" name="checkbox" value="checkbox"</td> </tr>
+            </tbody>
+        </table>   
+        <button class="btn btn-default" >Agregar Tipo Documento</button>
+        
+        <div >
+             <div  class="row" >
+                <label for="tipoDocumento" class="col-sm-4 control-label">Tipo de Documento</label>
+                <!--
+                <div class="col-sm-5">
+                
+                   <select  data-style="btn-primary" class="form-control"  ng-model="documento"   
+                            ng-options="r.descripcionTipoDocumento for r in tipoDocumentoPrestacion ">
+                    </select>
+                </div>
+                -->
+             </div> 
+             <br>
+            <div  class="row" >
+                <label for="tipoDocumento" class="col-sm-4 control-label">Descripcion Documento</label>
+                 <div class="col-sm-5">
+                <textarea class="form-control" ng-model= "documentoList.textoDescripcion" rows="4" cols="2"></textarea>
+                </div>
+            </div> 
+        </div>
+        
+        
+        <div class="row">
+            <button class="btn btn-primary btn-sm pull-right" ng-click="enviar()">Guardar</button>
+        </div>
+        </div>
+    </div> 
+</div>
+</form>
+</div>

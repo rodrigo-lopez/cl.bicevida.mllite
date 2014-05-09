@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" role="form" ng-submit="submitForm()" novalidate="novalidate">
+                <div class="alert alert-danger alert-dismissable" ng-show="form.rut.$error.bvValidarRut">                    
+                    <strong>Error!</strong>Formato de Rut no v&aacute;lido.
+                </div>
+                <legend>Liquidador de Reembolsos</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Rut Asegurado Titular</label>
+                    <div class="col-md-4">
+                        <input id="rut" name="rut" type="text" bv-validar_rut="bv-validar_rut" placeholder="12345678-9"
+                               ng-model="busqueda.rutAsegurado" class="form-control input-md"></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Fecha Atenci&oacute;n</label>
+                    <div class="col-md-4">
+                        <input id="fechaAtencion" name="fechaAtencion" type="date" ng-model="busqueda.fechaAtencion"
+                               class="form-control input-md"></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <a id="singlebutton" name="singlebutton" class="btn btn-primary pull-right"
+                           ng-href="#/prestaciones/{{busqueda.rutAsegurado}}/{{busqueda.fechaAtencion}}/{{busqueda.rutUsuario}}">Continuar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

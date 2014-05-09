@@ -1,0 +1,13 @@
+node_modules
+dist
+.tmp
+.sass-cache
+!ViewController/public_html/
+ViewController/public_html/*
+!ViewController/public_html/yeoman/
+ViewController/public_html/yeoman/app/bower_components
+.data
+deploy
+build
+lib
+.adf
